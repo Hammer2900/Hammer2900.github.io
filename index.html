@@ -1,1 +1,385 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test01</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .header {
+            padding: 15px 15px 20px 15px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 40px;
+        }
+
+        .fade-transition {
+            transition: opacity 0.2s ease;
+        }
+
+        .fade-enter, .fade-leave {
+            opacity: 0;
+        }
+
+        .filter-bay {
+            margin-bottom: 20px;
+        }
+
+        .filter-two {
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation">
+                    <a href="#" @click="currentView='create-search'">Utilites</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Toolbox v1.0</h3>
+    </div>
+    <div class="container">
+        <component :is="currentView" transition="fade" transition-mode="out-in"></component>
+  </div>
+</div>
+
+
+<template id="utilites-buttons">
+
+    <div>
+        <div>
+            <h1>Git task name generator</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">RESULT</label>
+                <input type="text" class="form-control" v-model="diceus_result" placeholder="---">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">TASK</label>
+                <input type="text" class="form-control" v-model="diceus_name" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">NAME</label>
+                <input type="text" class="form-control" v-model="diceus_caption" value="" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+            </div>
+            <button class="btn btn-primary" @click="generate_name">Generate name</button>
+        </div>
+        <hr>
+        <div>
+            <h1>Basic access authentication constructor</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">RESULT</label>
+                <input type="text" class="form-control" v-model="btoa_result" placeholder="---">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">LOGIN</label>
+                <input type="text" class="form-control" v-model="btoa_login" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">PASSWORD</label>
+                <input type="text" class="form-control" v-model="btoa_password" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+            </div>
+            <button type="submit" @click="decode_login_pass" class="btn btn-primary">Make hash</button>
+        </div>
+        <hr>
+        <div>
+            <h1>Basic access authentication encoder</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">RESULT</label>
+                <input type="text" class="form-control" v-model="result_to_encode" placeholder="---">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">KEY</label>
+                <input type="text" class="form-control" v-model="hash_to_encode" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <button type="submit" @click="encode_hash" class="btn btn-primary">Encode</button>
+        </div>
+        <hr>
+    </div>
+
+</template>
+
+
+<template id="manage-template">
+
+    <div>
+        <h1>ООО ТРК Трейд экспрес</h1>
+        <create-search></create-search>
+        <filters></filters>
+        <div class="list-group">
+            <a v-for="post in posts" href="#" class="list-group-item clearfix">
+                {{ post }}
+                <span class="pull-right">
+          <button class="btn btn-xs btn-default"> 11 </button>
+          <button class="btn btn-xs btn-default"> <span class="fa fa-info-circle fa-fw"></span> </button>
+          <button class="btn btn-xs btn-default"> <span class="fa fa-hand-o-right"></span> </button>
+        </span>
+            </a>
+        </div>
+        <pagination></pagination>
+    </div>
+
+</template>
+
+<template id="create-template">
+    <div>
+        <h1>Create Post</h1>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Post title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Post title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Post body</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button @click="alerttssss" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</template>
+
+<template id="manage-search">
+    <div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" placeholder="Поиск...">
+                </div>
+            </div>
+        </form>
+    </div>
+</template>
+
+<template id="manage-pagination">
+    <div>
+        <div class="page-nation">
+            <ul class="pagination pagination-large">
+                <li class="disabled"><span>«</span></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li class="disabled"><span>...</span></li>
+                <li>
+                <li><a rel="next" href="#">Next</a></li>
+
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template id="manage-filter">
+    <div>
+        <div class="btn-toolbar" role="toolbar" aria-label="...">
+            <div class="btn-group filter-bay" role="group" aria-label="...">
+                <button type="button" class="btn btn-default btn-xs"><b>по дате</b></button>
+                <button type="button" class="btn btn-default btn-xs"><b>по статусу</b></button>
+                <button type="button" class="btn btn-default btn-xs"><b>по коментариям</b></button>
+            </div>
+
+            <div class="btn-group filter-bay" role="group" aria-label="...">
+                <button type="button" class="btn btn-default btn-xs filter-two">сегодня</button>
+                <button type="button" class="btn btn-default btn-xs filter-two">последние 7 дней</button>
+                <button type="button" class="btn btn-default btn-xs filter-two">этот месяц</button>
+                <button type="button" class="btn btn-default btn-xs filter-two">этот год</button>
+            </div>
+
+            <div class="btn-group filter-bay" role="group" aria-label="...">
+                <button type="button" class="btn btn-success btn-xs">экспорт</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template id="manage-table">
+    <div>
+        <h1>ООО ТРК Трейд экспрес</h1>
+        <create-search></create-search>
+        <filters></filters>
+        <div class="table-responsive">
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Дата</th>
+              <th>Лицевой</th>
+              <th>Оплата</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+             <tr>
+              <td>8</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+              <td>Table cell</td>
+                <td>
+                    <button class="btn btn-xs btn-default"> 11</button>
+                    <button class="btn btn-xs btn-default"><span class="fa fa-info-circle fa-fw"></span></button>
+                    <button class="btn btn-xs btn-default"><span class="fa fa-hand-o-right"></span></button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+        <pagination></pagination>
+    </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
+<script>
+    Vue.component('manage-posts', {
+        template: '#manage-template',
+        data: function () {
+            return {
+                posts: [
+                    '26 декабря 2017 г. 16:17:01 - 0202040 = 78.0',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Vue.js Components',
+                    'Server Side Rendering with Vue',
+                    'Vue + Firebase'
+                ]
+            }
+        }
+    })
+
+    Vue.component('create-post', {
+        template: '#create-template',
+        methods: {
+            alerttssss: function () {
+                alert(this.$root.bus.user_login)
+            }
+        }
+    })
+
+    Vue.component('create-search', {
+        template: '#manage-search'
+    })
+
+    Vue.component('greeting', {
+        template: '<h1>Welcome to coligo!</h1>'
+    });
+
+    Vue.component('pagination', {
+        template: '#manage-pagination'
+    });
+
+    Vue.component('filters', {
+        template: '#manage-filter'
+    });
+
+    Vue.component('tables', {
+        template: '#manage-table'
+    });
+
+    Vue.component('utilites-buttons', {
+        template: '#utilites-buttons',
+        data: function () {
+            return {
+                hash_to_encode: 'aHdqYWNrcG90c0BnbWFpbC5jb206aHcxMjM0cHc=',
+                result_to_encode: '---',
+                btoa_login: 'finalka@ukr.net',
+                btoa_password: '1234',
+                btoa_result: '',
+                diceus_name: 'DICEUS-0000',
+                diceus_caption: 'Fix error message in the mobile app when users enter an incorrect login',
+                diceus_result: ''
+            }
+        },
+        methods: {
+            decode_login_pass: function () {
+                this.btoa_result = btoa(this.btoa_login + ':' + this.btoa_password)
+            },
+            encode_hash: function () {
+                this.result_to_encode = atob(this.hash_to_encode)
+            },
+            generate_name: function () {
+                this.diceus_result = this.diceus_name + '_' + getSlug( this.diceus_caption, '_')
+            }
+        }
+    });
+
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            bus: new Vue({
+                data: {
+                    user_login: false,
+                    loading: false
+                }
+            }),
+            currentView: 'utilites-buttons'
+        },
+        methods: {
+            greet: function () {
+                alert(11111)
+            }
+        }
+    })
+    Vue.config.devtools = true
+</script>
+</body>
+</html>
