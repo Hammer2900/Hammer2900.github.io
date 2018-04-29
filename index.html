@@ -629,8 +629,8 @@
                 <h1 v-if="title != ''">{{creator}} <small>({{title}})</small></h1>
             </div>
             <div class="row otstup">
-                <button class="btn btn-xs btn-default">Play</button>
-                <button class="btn btn-xs btn-default">Stop</button>
+                <button @click="play()" class="btn btn-xs btn-default">Play</button>
+                <button @click="stop()" class="btn btn-xs btn-default">Pause</button>
                 <button class="btn btn-xs btn-default">Repeat</button>
             </div>
             <div class="row otstup">
@@ -720,6 +720,13 @@
         methods: {
             testos: function(obj) {
                 obj.target.getElementsByTagName("audio")[0].play()
+            },
+            play: function(obj) {
+                this.my_obj.play()
+            },
+            stop: function(obj) {
+                this.my_obj.pause()
+                this.my_obj.currentTime = 0
             },
             play_obj: function(obj) {
                 this.creator = obj.creator
