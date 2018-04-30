@@ -123,6 +123,19 @@
             <button type="submit" @click="encode_hash" class="btn btn-primary">Encode</button>
         </div>
         <hr>
+        <div>
+            <h1>Generate header for comments</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">RESULT</label>
+                <input type="text" class="form-control" v-model="header1_result" placeholder="---">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Caption</label>
+                <input type="text" class="form-control" v-model="header1_caption">
+            </div>
+            <button @click="generate_header1()" class="btn btn-primary">Go</button>
+        </div>
+        <hr>
     </div>
 
 </template>
@@ -670,7 +683,9 @@
                 btoa_result: '',
                 diceus_name: 'DICEUS-0000',
                 diceus_caption: 'Fix error message in the mobile app when users enter an incorrect login',
-                diceus_result: ''
+                diceus_result: '',
+                header1_caption: '',
+                header1_result: ''
             }
         },
         methods: {
@@ -682,6 +697,30 @@
             },
             generate_name: function () {
                 this.diceus_result = this.diceus_name + '_' + getSlug( this.diceus_caption, '_')
+            },
+            generate_header1: function () {
+                function range(start, stop, step) {
+                    let a = [start], b = start;
+                    while (b < stop) {
+                        b += step;
+                        a.push(b)
+                    }
+                    return a;
+                }
+                function range_text(stop) {
+                    let a = '', b = 1;
+                    while (b < stop) {
+                        b += 1;
+                        a = a + '/'
+                    }
+                    return a;
+                }
+                function set_format_text(text) {
+                    let max = 100;
+                    let bort = (max - text.length) / 2;
+                    return range_text(bort) + ' ' + text + ' ' + range_text(bort)
+                }
+                this.header1_result = set_format_text(this.header1_caption)
             }
         }
     });
@@ -725,13 +764,13 @@
                 this.my_obj.play()
             },
             stop: function(obj) {
-                this.my_obj.pause()
+                this.my_obj.pause();
                 this.my_obj.currentTime = 0
             },
             play_obj: function(obj) {
-                this.creator = obj.creator
-                this.title = obj.title
-                this.my_obj.src = obj.location
+                this.creator = obj.creator;
+                this.title = obj.title;
+                this.my_obj.src = obj.location;
                 this.my_obj.play()
             }
 
@@ -767,7 +806,7 @@
                 alert(11111)
             }
         }
-    })
+    });
     Vue.config.devtools = true
 </script>
 </body>
