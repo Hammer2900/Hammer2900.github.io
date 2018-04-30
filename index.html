@@ -718,7 +718,7 @@
                 function set_format_text(text) {
                     let max = 100;
                     let bort = (max - text.length) / 2;
-                    return range_text(bort) + ' ' + text + ' ' + range_text(bort)
+                    return '#' + range_text(bort) + ' ' + text + ' ' + range_text(bort)
                 }
                 this.header1_result = set_format_text(this.header1_caption)
             }
