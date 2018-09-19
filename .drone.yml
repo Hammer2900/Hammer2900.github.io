@@ -1,6 +1,7 @@
-build:
-  image: golang
-  commands:
-    - go get
-    - go build
-    - go test
+pipeline:
+  backend:
+    image: golang
+    commands:
+      - go get
+      - go build
+      - go test
