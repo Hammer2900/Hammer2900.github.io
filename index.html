@@ -692,7 +692,7 @@
                 diceus_name: 'DICEUS-0000',
                 diceus_caption: 'Fix error message in the mobile app when users enter an incorrect login',
                 diceus_result: '',
-                header1_caption: '',
+                header1_caption: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
                 header1_result: '',
                 header1_left: '/',
                 header1_right: '/'
@@ -728,7 +728,7 @@
                 function set_format_text(text, left='/', right='/') {
                     let max = 100;
                     let bort = (max - text.length) / 2;
-                    return '#' + range_text(bort, left) + ' ' + text + ' ' + range_text(bort, right)
+                    return '# ' + range_text(bort, left) + ' ' + text + ' ' + range_text(bort, right)
                 }
                 this.header1_result = set_format_text(this.header1_caption, this.header1_left, this.header1_right)
             }
