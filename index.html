@@ -735,6 +735,7 @@
                     this.header1_left = '/';
                     this.header1_right = '/';
                 }
+                this.generate_header1()
             },
             decode_login_pass: function () {
                 this.btoa_result = btoa(this.btoa_login + ':' + this.btoa_password)
