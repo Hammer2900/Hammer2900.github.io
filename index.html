@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.jqueryui.min.css" integrity="sha256-7sOfBmlxFl2CtSHcz0nHPY7SWhylRQegIp6Zhbht1VQ=" crossorigin="anonymous" />
     <style>
         .header {
@@ -125,6 +126,16 @@
         <!--<hr>-->
         <div>
             <h1>Generate header for comments</h1>
+            <div class="form-group">
+                <select @change="set_template_var(selected_template)" v-model="selected_template">
+                    <option disabled value="">Выберите один из вариантов</option>
+                    <option>default</option>
+                    <option>72 =</option>
+                    <option>50 .</option>
+                    <option>30 .</option>
+                </select>
+            </div>
+            <span>Выбрано: {{ selected_template }}</span>
             <div class="form-group">
                 <label for="exampleInputEmail1">RESULT</label>
                 <input type="text" class="form-control" v-model="header1_result" placeholder="---">
@@ -680,6 +691,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
@@ -698,12 +710,32 @@
                 diceus_result: '',
                 header1_caption: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
                 header1_result: '',
+                selected_template: '',
                 header1_lenght: 100,
                 header1_left: '/',
                 header1_right: '/'
             }
         },
         methods: {
+            set_template_var: function (template_var) {
+                if (template_var === '72 =') {
+                    this.header1_lenght = 72;
+                    this.header1_left = '=';
+                    this.header1_right = '=';
+                } else if (template_var === '50 .') {
+                    this.header1_lenght = 50;
+                    this.header1_left = '.';
+                    this.header1_right = '.';
+                } else if (template_var === '30 .') {
+                    this.header1_lenght = 30;
+                    this.header1_left = '.';
+                    this.header1_right = '.';
+                } else {
+                    this.header1_lenght = 100;
+                    this.header1_left = '/';
+                    this.header1_right = '/';
+                }
+            },
             decode_login_pass: function () {
                 this.btoa_result = btoa(this.btoa_login + ':' + this.btoa_password)
             },
