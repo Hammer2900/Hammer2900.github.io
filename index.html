@@ -11,9 +11,12 @@
 <input>
 <textarea id="Text1"></textarea>
 <script>
+    let tg = window.Telegram.WebApp;
+
+    tg.expand();
     console.log(window.Telegram.WebApp.initData)
     document.getElementById("Text1").value = window.Telegram.WebApp.initData;
-    document.getElementById("Text2").value = window.Telegram.WebApp.initData;
+    document.getElementById("Text2").value = `${tg.initDataUnsafe}`;
 </script>
 </body>
 </html>
