@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<h1>World !!!</h1>
+<h1 id="Text2">World !!!</h1>
+<input>
+<textarea id="Text1"></textarea>
+<script>
+    console.log(window.Telegram.WebApp.initData)
+    document.getElementById("Text1").value = window.Telegram.WebApp.initData;
+    document.getElementById("Text2").value = window.Telegram.WebApp.initData;
+</script>
+</body>
+</html>
