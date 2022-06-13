@@ -49,11 +49,21 @@
    <input id="f1">
    <a class="link" href="https://mihailgok.ru">Link</a> <!--Просто ссылка для проверки-->
    <p class="hint">Some little hint</p> <!--Просто текст-подсказка для проверки-->
+   <h3>Init Data: </h3>
+    <pre id="initData"></pre>
+    <h3>Init Data (unsafe): </h3>
+    <pre id="initDataUnsafe"></pre>
    <button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
    <button id="btnED" class="button">Enable/Disable Main Button</button> <!--Кнопка, чтобы сделать кнопку активной/неактивной-->
 </body>
 
 <script>
+   window.Telegram.WebApp.ready();
+   const initData = window.Telegram.WebApp.initData || '';
+   const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe || {};
+   document.querySelector('#initData').innerHTML = JSON.stringify(initData, null, 2);
+   document.querySelector('#initDataUnsafe').innerHTML = JSON.stringify(initDataUnsafe, null, 2);
+
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
 
    tg.expand(); //расширяем на все окно
