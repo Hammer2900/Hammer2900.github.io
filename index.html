@@ -46,6 +46,7 @@
    <div id="usercard"> <!--Карта профиля, человека, который к нам обратился-->
    </div>
    <p>Just text</p> <!--Просто текст для проверки-->
+   <input id="f1">
    <a class="link" href="https://mihailgok.ru">Link</a> <!--Просто ссылка для проверки-->
    <p class="hint">Some little hint</p> <!--Просто текст-подсказка для проверки-->
    <button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
@@ -91,6 +92,8 @@
       //при клике на основную кнопку отправляем данные в строковом виде
    });
 
+   let input1 = document.getElementById("f1");
+   input1.value = window.location.href
 
    let usercard = document.getElementById("usercard"); //получаем блок usercard
 
